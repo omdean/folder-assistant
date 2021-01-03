@@ -21,6 +21,7 @@ class Directory {
    */
   static async create(path) {
     try {
+      if (fs.existsSync(path)) return;
       await fsPromise.mkdir(path);
       Output.stdout(constants.ACTION.createDir, `"${path}"`);
     } catch (error) {

@@ -1,6 +1,5 @@
 'use strict';
 
-const dirConfig = require('./src/directoryConfig');
+const index = require('./src/index');
 
-
-dirConfig.init();
+index.loadConfig(__dirname);

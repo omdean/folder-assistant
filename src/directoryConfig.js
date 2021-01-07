@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const YAML = require('yaml');
 
-const Directory = require('./directory');
+const Directory = require('./lib/directory');
 
 const DEFAULT_FILE_PATH = path.join(__dirname, '../dir_config.yml');
 

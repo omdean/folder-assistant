@@ -24,6 +24,32 @@ class File {
   static createSync(filePath, content) {
     fs.writeFileSync(filePath, content);
   }
+
+  /**
+   * To read file.
+   *
+   * @param {String} filePath - file path
+   */
+  static async read(filePath) {
+    try {
+      return await fsPromise.readFile(filePath, 'utf-8');
+    } catch (error) {
+      return null;
+    }
+  }
+
+  /**
+   * To read file in synchronous way.
+   *
+   * @param {String} filePath - file path
+   */
+  static readSync(filePath) {
+    try {
+      return fs.readFileSync(filePath, 'utf-8');
+    } catch (error) {
+      return null;
+    }
+  }
 }
 
 module.exports = File;

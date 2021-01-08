@@ -104,4 +104,4 @@ dist
 .tern-port
 .TODO
 .TODO.md
-src/output
+.output/

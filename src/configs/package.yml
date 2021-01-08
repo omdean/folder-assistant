@@ -3,4 +3,4 @@ config_dir: /src/configs
 # the name of directory related configs
 dir_config_file_name: directory.yml
 # runtime output dir
-output_dir: /output
+output_dir: /.output

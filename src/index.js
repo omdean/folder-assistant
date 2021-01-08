@@ -6,12 +6,26 @@ const constants = require('./constants');
 const ConfigUtils = require('./lib/configUtils');
 const Directory = require('./lib/directory');
 const File = require('./lib/file');
+const variables = require('./lib/variables');
 
 function loadConfig(rootDirName) {
+  const {
+    output_dir: outputRelativeDir,
+    configs_file: configsFileName
+  } = variables.pkg.default;
+
+  const outputDir = `${rootDirName}${outputRelativeDir}`;
+  const configsFilePath = `${outputDir}/${configsFileName}`;
+
+  const content = File.readSync(configsFilePath);
+  if (!content) {
+    variables.pkg = JSON.parse(content);
+    return;
+  }
+
   const parentDir = `${rootDirName}/src/configs`;
   const configFiles = Directory.readdir(parentDir);
   const configMap = {};
-  let outputDir = null;
 
   for (let file of configFiles) {
     const configDetail = ConfigUtils.loadYAMLConfig(`${parentDir}/${file}`);
@@ -19,14 +33,12 @@ function loadConfig(rootDirName) {
     if (obj.ext !== '.yml') continue;
     const itemName = constants.CONFIG_ITEM_NAME[obj.name] || `_${obj.name}`;
     configMap[itemName] = configDetail;
-    if (constants.CONFIG_ITEM_NAME.package === obj.name) {
-      outputDir = configDetail['output_dir'];
-    }
   }
 
-  if (!outputDir) return;
-  Directory.createSync(`${rootDirName}${outputDir}`);
-  File.createSync(`${rootDirName}${outputDir}/_configs.json`, JSON.stringify(configMap));
+  Directory.createSync(outputDir);
+  File.createSync(configsFilePath, JSON.stringify(configMap));
+  // global variable
+  variables.pkg = configMap;
 }
 
 module.exports = {

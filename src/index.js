@@ -12,14 +12,14 @@ function loadConfig(rootDirName) {
   const {
     output_dir: outputRelativeDir,
     configs_file: configsFileName
-  } = variables.pkg.default;
+  } = variables.json.default;
 
   const outputDir = `${rootDirName}${outputRelativeDir}`;
   const configsFilePath = `${outputDir}/${configsFileName}`;
 
   const content = File.readSync(configsFilePath);
-  if (!content) {
-    variables.pkg = JSON.parse(content);
+  if (content) {
+    variables.json = JSON.parse(content);
     return;
   }
 
@@ -39,6 +39,10 @@ function loadConfig(rootDirName) {
   File.createSync(configsFilePath, JSON.stringify(configMap));
   // global variable
   variables.pkg = configMap;
+}
+
+function init() {
+  const { di } = variables.pkg;
 }
 
 module.exports = {

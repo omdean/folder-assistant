@@ -1,7 +1,6 @@
 'use strict';
 
 module.exports = {
-  DIR_CONFIG_FILE_PATH: './configs/dir_config.yml',
   ACTION: {
     createDir: 'create directory'
   },

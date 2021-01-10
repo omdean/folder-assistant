@@ -2,5 +2,12 @@
 root_dir: '/Users/t_liu/ass_test'
 # sub directories
 sub_dirs:
-  - codes
-  - documents
+  -
+    name: 'documents'
+    desc: 'All kinds of files'
+  -
+    name: 'videos'
+    desc: 'Video type files'
+  -
+    name: 'audios'
+    desc: 'Audio type files'

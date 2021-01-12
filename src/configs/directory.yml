@@ -1,7 +1,7 @@
 # root directory
-root_dir: '/Users/t_liu/ass_test'
+rootDir: '/Users/t_liu/ass_test'
 # sub directories
-sub_dirs:
+subDirs:
   -
     name: 'documents'
     desc: 'All kinds of files'

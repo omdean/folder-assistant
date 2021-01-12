@@ -10,8 +10,8 @@ const variables = require('./lib/variables');
 
 function loadConfig(rootDirName) {
   const {
-    output_dir: outputRelativeDir,
-    configs_file: configsFileName
+    outputDir: outputRelativeDir,
+    configsFile: configsFileName
   } = variables.json.default;
 
   const outputDir = `${rootDirName}${outputRelativeDir}`;
@@ -42,7 +42,7 @@ function loadConfig(rootDirName) {
 }
 
 function init() {
-  const { di } = variables.pkg;
+  const {  } = variables.pkg;
 }
 
 module.exports = {

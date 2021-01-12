@@ -10,8 +10,8 @@ class Variables {
     // all configs here
     this[_json] = {
       default: {
-        output_dir: '/.output',
-        configs_file: '_configs.json'
+        outputDir: '/.output',
+        configsFile: '_configs.json'
       }
     };
   }

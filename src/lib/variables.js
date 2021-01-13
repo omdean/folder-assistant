@@ -1,43 +1,52 @@
 'use strict';
 
+const dirLevelVars = require('./models/dirLevelVariables');
+
 const _json = Symbol('json');
 
 /**
  * Common variables.
  */
-class Variables {
+class Variables extends dirLevelVars {
   constructor() {
+    super(_json);
     // all configs here
-    this[_json] = {
-      default: {
-        outputDir: '/.output',
-        configsFile: '_configs.json'
-      }
+    this[_json].default = {
+      outputDir: '/.output',
+      configsFile: '_configs.json'
     };
   }
 
   /**
-   * Updating configs.
+   * Setter for update specific variables.
    */
   set json(value) {
-    Object.assign(this[_json], value);
+    const { directory = {}, package : pkg = {} } = value;
+    this.directory = directory;
+    this.package = pkg;
   }
 
+  /**
+   * Getter for object contain all variables.
+   */
   get json() {
     return this[_json];
   }
 
   /**
-   * Setting package level configs.
+   * Setter for default configs.
    * 
    * @param {Object} value - value
    */
-  set pkg(value) {
-    this[_json].package = value;
+  set default(value) {
+    Object.assign(this[_json].default, value);
   }
 
-  get pkg() {
-    return this[_json].package;
+  /**
+   * Getter for default configs.
+   */
+  get default() {
+    return this[_json].default;
   }
 }
 

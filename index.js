@@ -3,3 +3,4 @@
 const index = require('./src/index');
 
 index.loadConfig(__dirname);
+index.init();

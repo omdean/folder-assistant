@@ -12,14 +12,15 @@ function loadConfig(rootDirName) {
   const {
     outputDir: outputRelativeDir,
     configsFile: configsFileName
-  } = variables.json.default;
+  } = variables.default;
 
   const outputDir = `${rootDirName}${outputRelativeDir}`;
   const configsFilePath = `${outputDir}/${configsFileName}`;
-
+  console.log('====>', variables);
   const content = File.readSync(configsFilePath);
   if (content) {
     variables.json = JSON.parse(content);
+    console.log('====>', variables.package);
     return;
   }
 
@@ -33,18 +34,23 @@ function loadConfig(rootDirName) {
     if (obj.ext !== '.yml') continue;
     const itemName = constants.CONFIG_ITEM_NAME[obj.name] || `_${obj.name}`;
     configMap[itemName] = configDetail;
+    variables[itemName] = configDetail;
   }
 
   Directory.createSync(outputDir);
   File.createSync(configsFilePath, JSON.stringify(configMap));
-  // global variable
-  variables.pkg = configMap;
 }
 
 function init() {
-  const {  } = variables.pkg;
+  const { rootDir, subDirs = [] } = variables.directory;
+  console.log(subDirs);
+  Directory.createSync(rootDir);
+  for (let dir of subDirs) {
+    Directory.createSync(`${rootDir}/${dir.name}`);
+  }
 }
 
 module.exports = {
-  loadConfig
+  loadConfig,
+  init
 };

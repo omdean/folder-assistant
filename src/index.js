@@ -13,14 +13,12 @@ function loadConfig(rootDirName) {
     outputDir: outputRelativeDir,
     configsFile: configsFileName
   } = variables.default;
-
   const outputDir = `${rootDirName}${outputRelativeDir}`;
   const configsFilePath = `${outputDir}/${configsFileName}`;
-  console.log('====>', variables);
   const content = File.readSync(configsFilePath);
+
   if (content) {
     variables.json = JSON.parse(content);
-    console.log('====>', variables.package);
     return;
   }
 
@@ -43,7 +41,6 @@ function loadConfig(rootDirName) {
 
 function init() {
   const { rootDir, subDirs = [] } = variables.directory;
-  console.log(subDirs);
   Directory.createSync(rootDir);
   for (let dir of subDirs) {
     Directory.createSync(`${rootDir}/${dir.name}`);

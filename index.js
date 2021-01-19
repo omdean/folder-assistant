@@ -3,10 +3,15 @@
 const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 
-const index = require('./src/index');
+function mwLoadConfig(argv) {
+  argv._custom = {
+    workingDir: __dirname
+  };
+}
 
-// index.loadConfig(__dirname);
-// index.init();
+const fd = yargs(hideBin(process.argv))
+  .commandDir('cmds')
+  .middleware([mwLoadConfig])
+  .help();
 
-const argv = yargs(hideBin(process.argv)).alias('key', 'ke').array('ke').parse();
-console.log(argv);
+console.log(fd.argv);

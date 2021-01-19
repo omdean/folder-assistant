@@ -10,7 +10,7 @@ class Variables {
     this[_json] = {};
     // all configs here
     this[_json].default = {
-      outputDir: '/.output',
+      outputDir: '.folder_assistant',
       configsFile: '_configs.json'
     };
     this[_json].package = {};

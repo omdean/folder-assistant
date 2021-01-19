@@ -1,6 +1,6 @@
 # config directory relate to root dir of package
-configDir: /src/configs
+configDir: configs
 # the name of directory related configs
 dirConfigFileName: directory.yml
 # runtime output dir
-outputDir: /.output
+outputDir: .output

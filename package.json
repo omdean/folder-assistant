@@ -8,6 +8,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "tsc": "tsc"
   },
+  "bin": {
+    "fass": "./index.js"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
